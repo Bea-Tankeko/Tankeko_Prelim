@@ -1,0 +1,10 @@
+---
+- name: Install in OS
+  hosts: web_servers
+  become: yes
+  tasks:
+    - name: Install git on centos
+      yum:
+        name: git 
+        state: present
+ 
