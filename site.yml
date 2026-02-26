@@ -1,15 +1,19 @@
 ---
-- hosts: web_servers
+- hosts: workstations
   become: true
-  name: Copy default HTML file for site
-
   tasks:
-    - name: Copy default html file to web root
-      tags: apache, apache2, httpd
-      copy:
-        src: /root/files/default_site.html
-        dest: /var/www/html/index.html
+    - name: install unzip
+      package: 
+        name: unzip
+
+    - name: install terraform
+      unarchive:
+        src: https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
+        dest: /usr/local/bin
+        remote_src: yes
+        mode: 0755
         owner: root
         group: root
-        mode: '0644'
-        remote_src: yes
+
+
+ 
