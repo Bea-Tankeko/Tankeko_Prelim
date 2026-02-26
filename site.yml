@@ -1,5 +1,15 @@
 ---
-- hosts: all
+- hosts: web_servers
   become: true
+  name: Copy default HTML file for site
+
   tasks:
-  
+    - name: Copy default html file to web root
+      tags: apache, apache2, httpd
+      copy:
+        src: /root/files/default_site.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+        remote_src: yes
